@@ -26,7 +26,7 @@ devtools::install_github("harvard-stat108s23/project2-group18")
 ## Examples
 
 We can wrangle the data using unique variables to perform summary
-function and create meaninful visualizations:
+functions:
 
 ``` r
 library(shoelati)
@@ -63,7 +63,11 @@ shoelati |>
 #>  8 Reebok      109.  31.0     120   200    60   100
 #>  9 Skechers     71.0 14.7      65   125    50    89
 #> 10 Vans         60    9.02     65    70    50   100
+```
 
+We can also create meaningful data vidualizations:
+
+``` r
 library(viridis)
 #> Loading required package: viridisLite
 
@@ -77,20 +81,34 @@ ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) 
   theme(text = element_text(size = 15))
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-example 2-1.png" width="100%" />
 
 What is special about using `README.Rmd` instead of just `README.md`?
 You can include R chunks like so:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+summary(shoelati)
+#>     brand              model               type              gender         
+#>  Length:1006        Length:1006        Length:1006        Length:1006       
+#>  Class :character   Class :character   Class :character   Class :character  
+#>  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+#>                                                                             
+#>                                                                             
+#>                                                                             
+#>     size_us          color             material           price_usd    
+#>  Min.   : 6.000   Length:1006        Length:1006        Min.   : 25.0  
+#>  1st Qu.: 8.000   Class :character   Class :character   1st Qu.: 70.0  
+#>  Median : 9.000   Mode  :character   Mode  :character   Median : 90.0  
+#>  Mean   : 8.912                                         Mean   :101.3  
+#>  3rd Qu.:10.000                                         3rd Qu.:130.0  
+#>  Max.   :12.000                                         Max.   :250.0  
+#>  general_type          emoji          
+#>  Length:1006        Length:1006       
+#>  Class :character   Class :character  
+#>  Mode  :character   Mode  :character  
+#>                                       
+#>                                       
+#> 
 ```
 
 You’ll still need to render `README.Rmd` regularly, to keep `README.md`

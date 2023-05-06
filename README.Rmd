@@ -29,9 +29,9 @@ You can install the development version of shoelati from [GitHub](https://github
 devtools::install_github("harvard-stat108s23/project2-group18")
 ```
 
-## Example
+## Examples
 
-We can wrangle the data using unique variables to perform summary function: 
+We can wrangle the data using unique variables to perform summary functions: 
 
 ```{r example}
 library(shoelati)
@@ -48,13 +48,10 @@ shoelati |>
 
 ```
 
-## Another Example
 
-We can also create meaningful data visualizations with this data: 
+We can also create meaningful data vidualizations:
 
-```{r example}
-library(shoelati)
-library(tidyverse)
+```{r example 2}
 library(viridis)
 
 ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) +
@@ -73,7 +70,7 @@ ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) 
 What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
 ```{r cars}
-summary(cars)
+summary(shoelati)
 ```
 
 You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
