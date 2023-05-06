@@ -31,19 +31,44 @@ devtools::install_github("harvard-stat108s23/project2-group18")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+We can wrangle the data using unique variables to perform summary function: 
 
 ```{r example}
 library(shoelati)
 library(tidyverse)
 
 shoelati |>
-  count(brand)
-
-shoelati |>
-  count(brand, general_type)
+  group_by(brand) |>
+  summarize(mean = mean(price_usd),
+            sd = sd(price_usd),
+            median = median(price_usd),
+            max = max(price_usd),
+            min = min(price_usd),
+            count = n())
 
 ```
+
+## Another Example
+
+We can also create meaningful data visualizations with this data: 
+
+```{r example}
+library(shoelati)
+library(tidyverse)
+library(viridis)
+
+ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) +
+  geom_violin() +
+  guides(color = "none") +
+  scale_color_viridis(discrete = TRUE) +
+  labs(title = "How does Price Distribution vary according to Brand",
+       x = "Price (USD)",
+       y = "Brand") +
+  theme(text = element_text(size = 15))
+
+```
+
+
 
 What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 

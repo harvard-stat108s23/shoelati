@@ -23,9 +23,10 @@ You can install the development version of shoelati from
 devtools::install_github("harvard-stat108s23/project2-group18")
 ```
 
-## Example
+## Examples
 
-This is a basic example which shows you how to solve a common problem:
+We can wrangle the data using unique variables to perform summary
+function and create meaninful visualizations:
 
 ``` r
 library(shoelati)
@@ -42,38 +43,41 @@ library(tidyverse)
 #> ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors
 
 shoelati |>
-  count(brand)
-#> # A tibble: 10 × 2
-#>    brand           n
-#>    <chr>       <int>
-#>  1 Adidas        100
-#>  2 Asics         100
-#>  3 Converse      100
-#>  4 Fila           99
-#>  5 New Balance   100
-#>  6 Nike          118
-#>  7 Puma          100
-#>  8 Reebok        100
-#>  9 Skechers       89
-#> 10 Vans          100
+  group_by(brand) |>
+  summarize(mean = mean(price_usd),
+            sd = sd(price_usd),
+            median = median(price_usd),
+            max = max(price_usd),
+            min = min(price_usd),
+            count = n())
+#> # A tibble: 10 × 7
+#>    brand        mean    sd median   max   min count
+#>    <chr>       <dbl> <dbl>  <dbl> <dbl> <dbl> <int>
+#>  1 Adidas      147.  47.8     140   220    25   100
+#>  2 Asics       131.  34.0     120   180    70   100
+#>  3 Converse     77.6 13.9      75   120    55   100
+#>  4 Fila         69.9  6.49     70    95    60    99
+#>  5 New Balance 117.  30.5     110   175    80   100
+#>  6 Nike        123.  34.1     120   250    85   118
+#>  7 Puma        101.  22.4     100   140    65   100
+#>  8 Reebok      109.  31.0     120   200    60   100
+#>  9 Skechers     71.0 14.7      65   125    50    89
+#> 10 Vans         60    9.02     65    70    50   100
 
-shoelati |>
-  count(brand, general_type)
-#> # A tibble: 30 × 3
-#>    brand    general_type     n
-#>    <chr>    <chr>        <int>
-#>  1 Adidas   everyday        56
-#>  2 Adidas   fashion          8
-#>  3 Adidas   slides           3
-#>  4 Adidas   work-out        33
-#>  5 Asics    everyday         2
-#>  6 Asics    trail            3
-#>  7 Asics    work-out        95
-#>  8 Converse everyday        89
-#>  9 Converse skates           4
-#> 10 Converse work-out         7
-#> # … with 20 more rows
+library(viridis)
+#> Loading required package: viridisLite
+
+ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) +
+  geom_violin() +
+  guides(color = "none") +
+  scale_color_viridis(discrete = TRUE) +
+  labs(title = "How does Price Distribution vary according to Brand",
+       x = "Price (USD)",
+       y = "Brand") +
+  theme(text = element_text(size = 15))
 ```
+
+<img src="man/figures/README-example-1.png" width="100%" />
 
 What is special about using `README.Rmd` instead of just `README.md`?
 You can include R chunks like so:
