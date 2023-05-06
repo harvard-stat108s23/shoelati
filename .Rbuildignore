@@ -1,2 +1,6 @@
 ^pkgDemo\.Rproj$
 ^\.Rproj\.user$
+^data-raw$
+^sandbox$
+^LICENSE\.md$
+^README\.Rmd$

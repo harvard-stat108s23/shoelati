@@ -1,0 +1,39 @@
+
+```{r}
+library(tidyverse)
+
+brandPrices <- function(data, brand, brands_listed, x_axis, y_axis, title_name){
+  #filter for the specific brand we want to examine
+  dataBrands <- data |>
+    filter({{brand}} %in% c({{brands_listed}})) 
+  
+  boxplot <- ggplot(data = dataBrands, mapping = aes(x = {{x_axis}}, y = {{y_axis}}, fill = {{brand}})) +
+    geom_boxplot(color = "black") +
+    facet_wrap(vars({{brand}})) +
+    viridis::scale_fill_viridis(discrete = TRUE) +
+    theme(text = element_text(size = 15),
+          axis.text.x = element_text(angle = 45,
+                                    vjust = 1,
+                                    hjust = 1)) +
+    labs(title = title_name) +
+    guides(fill = "none")
+  
+  summarytable <- dataBrands |>
+    group_by({{brand}}, {{x_axis}}) |>
+    summarize(mean_y = mean({{y_axis}}),
+              sd_y = sd({{y_axis}}),
+                     max_y = max({{y_axis}}),
+                     min_y = min({{y_axis}}))
+
+  return(list(boxplot, summarytable))
+
+
+}
+
+brandPrices(data = shoeLati, brand = Brand, brands_listed = c("Adidas", "Nike"), 
+            x_axis = Type, y_axis = `Price (USD)`,
+            title = "Average Price by Type of Shoe According to Brand ")
+
+
+
+```

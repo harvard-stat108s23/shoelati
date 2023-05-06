@@ -1,14 +1,23 @@
-Package: pkgDemo
-Title: What the Package Does (One Line, Title Case)
+Package: shoelati
+Title: Using shoe data to explore trends in terms of price, size, and type among other variables.
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Heleah", "Soulati", , "heleahsoulati@gmail.com", role = c("aut", "cre"))
+Description: shoelati explores variables from this shoe dataset to create meaningful graphs.    The first function creates an accessible boxplot with two categorical and one numerical variable.    The second package calculates summary functions of a numerical variable after grouping by a categorical and numerical variable.    The third package creates a visualization for two numerical variables using emojis as the geom.
+License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 URL: https://github.com/mcconvil/pkgDemo
 BugReports: https://github.com/mcconvil/pkgDemo/issues
+Depends: 
+    R (>= 2.10)
+LazyData: true
+Imports: 
+    dplyr,
+    ggimage,
+    ggplot2,
+    viridis
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

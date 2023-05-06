@@ -1,0 +1,40 @@
+
+
+```{r}
+
+
+ggplot2::ggplot(data = shoelati, mapping = ggplot2::aes(x  = `Size (US)`, y = `Price (USD)`)) +
+  ggimage::geom_emoji(ggplot2::aes(image = Emoji))
+
+
+````
+
+
+
+
+
+
+
+
+
+
+
+
+```{r, eval = FALSE}
+library(tidyverse)
+
+ nike_icon <- "https://raw.githubusercontent.com/harvard-stat108s23/project2-group18/master/sandbox/nike-free-nike-air-max-sneakers-shoe-red-shoes.png?token=GHSAT0AAAAAACAMBUMHLVNQ2XTCC7KKMM7UZCREROQ"
+converse_icon <- 
+ 
+ # adidas_icon <- make_icon()
+ # asics_icon <- make_icon()
+ # fila_icon <- make_icon()
+ # reebok_icon <- make_icon()
+ # puma_icon <- make_icon()
+# 
+ shoeLati %>%
+   filter(Brand == "Nike") |>
+   ggplot(mapping = aes(x = `Size (US)`, y = `Price (USD)`)) +
+   ggimage::geom_image(aes(image = nike_icon))
+
+```
