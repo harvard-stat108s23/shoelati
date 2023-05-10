@@ -6,6 +6,8 @@
 \#insert my hex sticker
 
 <!-- badges: start -->
+
+<img src="man/figures/hex-shoelati.png" width="0.1" />
 <!-- badges: end -->
 
 shoelati uses data on shoes collected from a particular region (last
@@ -115,16 +117,7 @@ ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) 
        x = "Price (USD)",
        y = "Brand",
        caption = "Each color represents a different brand.") +
-  theme(text = element_text(size = 12))
+  theme(text = element_text(size = 13))
 ```
 
 <img src="man/figures/README-price-brand-1.png" width="100%" />
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.

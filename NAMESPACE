@@ -3,3 +3,5 @@
 export(boxplot3Variables)
 export(emojiViz)
 export(summaryFunctions)
+importFrom(stats,median)
+importFrom(stats,sd)

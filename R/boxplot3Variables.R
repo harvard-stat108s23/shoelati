@@ -57,7 +57,7 @@ boxplot3Variables <- function(data, variable_toFilter, variable_filteredOn, expl
 
   #create boxplot to observe relationship between our variables
   boxplot <- ggplot2::ggplot(data = data_filtered_cat, mapping = ggplot2::aes(x = {{explanatory_variable}}, y = {{response_variable}}, fill = {{variable_toFilter}})) +
-    ggplot2::geom_boxplot(color = "black") +
+    ggplot2::geom_boxplot(color = "brown2") +
     ggplot2::facet_wrap(ggplot2::vars({{variable_toFilter}})) +
     ggplot2::theme(text = ggplot2::element_text(size = 15),
                    axis.text.x = ggplot2::element_text(angle = 45,

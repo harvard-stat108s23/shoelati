@@ -8,6 +8,8 @@
 #' @param variable_filteredOn Filter the numeric or categorical variable (variable_toFilter) according to relevant subcategories of interest.
 #' @param explanatory_variable One unique numeric or categorical variable to group the data by to better understand the response variable.
 #' @param response_variable One numeric variable whose values are analyzed in the context of the explanatory and filtered variable to draw trends in the data.
+#' @importFrom stats median
+#' @importFrom stats sd
 #'
 #' @return A datatable with multiple summary functions perfomed on a chosen response variable.    Dimensions depend on the number of categories we have filtered on and the number of values for our explanatory variable.
 #' @export
