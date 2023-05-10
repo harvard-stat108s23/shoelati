@@ -5,20 +5,20 @@
 
 <!-- badges: start -->
 
-<img src="man/figures/hex-shoelati.png" width="15%" />
+<img src="man/figures/hex-shoelati.png" width="20%" />
 <!-- badges: end -->
 
 shoelati uses data on shoes collected from a particular region (last
 updated two months ago) to understand the relationships between the
 variables in the data and how they influence one another. This package
 makes visualizations which are more accessible, conclusive, and fun.
-Specifically, it uses package uses packages such as viridis to make the
-visualizations more accessible for all individuals, including those who
-suffer from colorblindness. It also performs commmon summary functions
-to find trends in numeric variables after grouping or filtering by
-numeric or categorical variables. Finally, it demonstrates how we can
-use geoms such as emojis to make more fun graphs, while also uncovering
-how general shoe types can cluster in particular variables.
+Specifically, it uses package such as viridis to make the visualizations
+more accessible to all individuals, including those who suffer from
+colorblindness, and it increases text size. It also performs common
+summary functions to find trends in numeric variables after grouping or
+filtering by numeric or categorical variables. Finally, it demonstrates
+how we can use geoms such as emojis to make more fun graphs, while also
+uncovering how general shoe types can cluster in particular variables.
 
 ## Installation
 
@@ -32,10 +32,8 @@ devtools::install_github("harvard-stat108s23/shoelati")
 
 ## Exploring the data
 
-Let’s first explore the different variables in the data and their
-diverse range of inputs.
-
 ``` r
+#loading the libraries
 library(shoelati)
 library(ggplot2)
 library(dplyr)
@@ -47,7 +45,16 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
+```
 
+Let’s first explore the different variables in the data and their
+diverse range of inputs. We can determine that `shoelati` contains 8
+categorical variables and 2 numeric variables as highlighted below.
+Categorical: brand, model, type, gender, color, material, general_type,
+and emoji Numeric: size_us and price_usd. The code below dives more
+deeply into discussing these variables and their inputs.
+
+``` r
 summary(shoelati)
 #>     brand              model               type              gender         
 #>  Length:1006        Length:1006        Length:1006        Length:1006       
@@ -74,8 +81,10 @@ summary(shoelati)
 
 ## Examples
 
-We can wrangle the data using unique variables to perform summary
-functions:
+We can better understand how the different variables interact/impact one
+another through wrangling the data and examining the changes in our
+response variable. In the following code, we will examine how the price
+of shoes varies depending on the brand we are examining.
 
 ``` r
 shoelati |>
@@ -101,7 +110,10 @@ shoelati |>
 #> 10 Vans         60    9.02     65    70    50   100
 ```
 
-We can also create meaningful data vidualizations:
+We can also create meaningful data visualizations using ‘shoelati’. In
+the example below, we are uncovering how price varies depending on the
+brand we are examining. The violin plot in particular highlights these
+differences in distribution.
 
 ``` r
 library(viridis)
@@ -119,3 +131,13 @@ ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) 
 ```
 
 <img src="man/figures/README-price-brand-1.png" width="100%" />
+
+## Licence
+
+Attribution 4.0 International (CC BY 4.0)
+
+## Sources
+
+The data is taken from the online database kaggle. It is found in the
+link below:
+<https://www.kaggle.com/datasets/rkiattisak/shoe-prices-dataset>

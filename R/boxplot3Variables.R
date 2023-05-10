@@ -48,7 +48,8 @@ boxplot3Variables <- function(data, variable_toFilter, variable_filteredOn, expl
    #make sure that the variable_toFilter is categorical
    if((is.numeric(variable_toFilter_vec))){
      stop("Please insert a categorical variable for the variable to filter by so that the color can
-          take on discrete values in scale_fill_viridis(discrete = TRUE)")
+          take on discrete values in scale_fill_viridis(discrete = TRUE).
+          Check out 'boxplotfixing.R' in the sandbox folder for my attempt to fix the issue.")
    }
 
   #filter cat_variable according to cat_filteredOn
