@@ -30,8 +30,10 @@ You can install the development version of shoelati from
 devtools::install_github("harvard-stat108s23/shoelati")
 ```
 
-\##Exploring the data Let’s first explore the different variables in the
-data and their diverse range of inputs.
+## Exploring the data
+
+Let’s first explore the different variables in the data and their
+diverse range of inputs.
 
 ``` r
 library(shoelati)
@@ -45,9 +47,7 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
-```
 
-``` r
 summary(shoelati)
 #>     brand              model               type              gender         
 #>  Length:1006        Length:1006        Length:1006        Length:1006       

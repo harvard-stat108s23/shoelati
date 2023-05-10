@@ -31,7 +31,7 @@ You can install the development version of shoelati from [GitHub](https://github
 devtools::install_github("harvard-stat108s23/shoelati")
 ```
 
-##Exploring the data
+## Exploring the data
 Let's first explore the different variables in the data and their diverse range of inputs.
 
 ```{r}
@@ -39,9 +39,6 @@ library(shoelati)
 library(ggplot2)
 library(dplyr)
 
-```
-
-```{r sum-shoelati}
 summary(shoelati)
 ```
 
