@@ -3,11 +3,9 @@
 
 # shoelati
 
-\#insert my hex sticker
-
 <!-- badges: start -->
 
-<img src="man/figures/hex-shoelati.png" width="0.1" />
+<img src="man/figures/hex-shoelati.png" width="0.5" />
 <!-- badges: end -->
 
 shoelati uses data on shoes collected from a particular region (last
