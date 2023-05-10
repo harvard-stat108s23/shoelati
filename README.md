@@ -115,7 +115,7 @@ ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) 
        x = "Price (USD)",
        y = "Brand",
        caption = "Each color represents a different brand.") +
-  theme(text = element_text(size = 15))
+  theme(text = element_text(size = 12))
 ```
 
 <img src="man/figures/README-price-brand-1.png" width="100%" />
