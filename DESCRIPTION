@@ -1,9 +1,9 @@
 Package: shoelati
-Title: Using shoe data to explore trends in terms of price, size, and type among other variables.
+Title: Using shoe data to explore trends in prices, sizes, brands, and many other variables for shoes data collected
 Version: 0.0.0.9000
 Authors@R: 
     person("Heleah", "Soulati", , "heleahsoulati@gmail.com", role = c("aut", "cre"))
-Description: shoelati explores variables from this shoe dataset to create meaningful graphs.    The first function creates an accessible boxplot with two categorical and one numerical variable.    The second package calculates summary functions of a numerical variable after grouping by a categorical and numerical variable.    The third package creates a visualization for two numerical variables using emojis as the geom.
+Description: shoelati explores the associations between variables from a shoe dataset to create meaningful graphs.    The first function produces a datatable when calculating summary statistics (mean, median, etc.) for a numeric variable being grouped by to two other variables (either categorical or numeric).    The second function goes hand in hand with the first- it creates an accessible boxplot (appropriate colors and text sizes) with three variables interest- the response variable must be numeric.        The third package creates a visualization to determine the association between two numeric variables using emojis as the geom.
 License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -19,5 +19,9 @@ Imports:
     ggplot2,
     viridis
 Suggests: 
+    knitr,
+    rmarkdown,
+    tidyr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+VignetteBuilder: knitr

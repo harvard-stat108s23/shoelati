@@ -3,15 +3,22 @@
 
 # shoelati
 
+\#insert my hex sticker
+
 <!-- badges: start -->
 <!-- badges: end -->
 
-shoelati is an extension of ggplot2 which makes data representations
-more accessible, conclusive, and fun. This package uses packages such as
-viridis to make the visualizations specifically more reacheable for all
-individauls. It also performs commmon summary functions to find trends.
+shoelati uses data on shoes collected from a particular region to
+understand the relationships between the variables in the data and how
+they influence one another. This package makes visualizations which are
+more accessible, conclusive, and fun. Specifically, it uses package uses
+packages such as viridis to make the visualizations more accessible for
+all individuals, including those who suffer from colorblindness. It also
+performs commmon summary functions to find trends in numeric variables
+after grouping or filtering by numeric or categorical variables.
 Finally, it demonstrates how we can use geoms such as emojis to make
-more fun graphs.
+more fun graphs, while also uncovering how general shoe types can
+cluster in particular variables.
 
 ## Installation
 
@@ -20,13 +27,11 @@ You can install the development version of shoelati from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("harvard-stat108s23/project2-group18")
+devtools::install_github("harvard-stat108s23/shoelati")
 ```
 
-## Examples
-
-We can wrangle the data using unique variables to perform summary
-functions:
+\##Exploring the data Let’s first explore the different variables in the
+data!
 
 ``` r
 library(shoelati)
@@ -41,7 +46,39 @@ library(tidyverse)
 #> ✖ dplyr::filter() masks stats::filter()
 #> ✖ dplyr::lag()    masks stats::lag()
 #> ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors
+```
 
+``` r
+summary(shoelati)
+#>     brand              model               type              gender         
+#>  Length:1006        Length:1006        Length:1006        Length:1006       
+#>  Class :character   Class :character   Class :character   Class :character  
+#>  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+#>                                                                             
+#>                                                                             
+#>                                                                             
+#>     size_us          color             material           price_usd    
+#>  Min.   : 6.000   Length:1006        Length:1006        Min.   : 25.0  
+#>  1st Qu.: 8.000   Class :character   Class :character   1st Qu.: 70.0  
+#>  Median : 9.000   Mode  :character   Mode  :character   Median : 90.0  
+#>  Mean   : 8.912                                         Mean   :101.3  
+#>  3rd Qu.:10.000                                         3rd Qu.:130.0  
+#>  Max.   :12.000                                         Max.   :250.0  
+#>  general_type          emoji          
+#>  Length:1006        Length:1006       
+#>  Class :character   Class :character  
+#>  Mode  :character   Mode  :character  
+#>                                       
+#>                                       
+#> 
+```
+
+## Examples
+
+We can wrangle the data using unique variables to perform summary
+functions:
+
+``` r
 shoelati |>
   group_by(brand) |>
   summarize(mean = mean(price_usd),
@@ -81,45 +118,13 @@ ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) 
   theme(text = element_text(size = 15))
 ```
 
-<img src="man/figures/README-example 2-1.png" width="100%" />
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(shoelati)
-#>     brand              model               type              gender         
-#>  Length:1006        Length:1006        Length:1006        Length:1006       
-#>  Class :character   Class :character   Class :character   Class :character  
-#>  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
-#>                                                                             
-#>                                                                             
-#>                                                                             
-#>     size_us          color             material           price_usd    
-#>  Min.   : 6.000   Length:1006        Length:1006        Min.   : 25.0  
-#>  1st Qu.: 8.000   Class :character   Class :character   1st Qu.: 70.0  
-#>  Median : 9.000   Mode  :character   Mode  :character   Median : 90.0  
-#>  Mean   : 8.912                                         Mean   :101.3  
-#>  3rd Qu.:10.000                                         3rd Qu.:130.0  
-#>  Max.   :12.000                                         Max.   :250.0  
-#>  general_type          emoji          
-#>  Length:1006        Length:1006       
-#>  Class :character   Class :character  
-#>  Mode  :character   Mode  :character  
-#>                                       
-#>                                       
-#> 
-```
+<img src="man/figures/README-price-brand-1.png" width="100%" />
 
 You’ll still need to render `README.Rmd` regularly, to keep `README.md`
 up-to-date. `devtools::build_readme()` is handy for this. You could also
 use GitHub Actions to re-render `README.Rmd` every time you push. An
 example workflow can be found here:
 <https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
 
 In that case, don’t forget to commit and push the resulting figure
 files, so they display on GitHub and CRAN.

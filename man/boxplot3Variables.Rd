@@ -2,27 +2,29 @@
 % Please edit documentation in R/boxplot3Variables.R
 \name{boxplot3Variables}
 \alias{boxplot3Variables}
-\title{Create an accessible graph which highlights the changes in price depending on price, type, and brand}
+\title{An accessible boxplot according to three variables.}
 \usage{
 boxplot3Variables(
   data,
-  cat_variable,
-  cat_filteredOn,
-  cat_variable_x,
-  num_variable_y,
-  graph_title
+  variable_toFilter,
+  variable_filteredOn,
+  explanatory_variable,
+  response_variable,
+  graph_title,
+  xaxis_label,
+  yaxis_label
 )
 }
 \arguments{
-\item{data}{A data frame.}
+\item{data}{A data frame}
 
-\item{cat_variable}{Categorical variable in the data frame to filter on.}
+\item{variable_toFilter}{One numeric or categorical variable in the data frame to filter on.}
 
-\item{cat_filteredOn}{Filter the categorical variable (cat_variable) according to relevant subcategories.}
+\item{variable_filteredOn}{Filter the numeric or categorical variable (variable_toFilter) according to relevant subcategories of interest.}
 
-\item{cat_variable_x}{Categorical variable to plot on the x-axis of the visualization.}
+\item{explanatory_variable}{One unique numeric or categorical variable to group the data by to better understand the response variable.}
 
-\item{num_variable_y}{Numerical variable to plot on the y-axis of the visualization.}
+\item{response_variable}{One numeric variable whose values are analyzed in the context of the explanatory and filtered variable to draw trends in the data.}
 
 \item{graph_title}{The graph's label.}
 
@@ -31,15 +33,17 @@ boxplot3Variables(
 \item{yaxis_label}{The y-axis's label.}
 }
 \value{
-A boxplot
+A boxplot highlighting trends according of the variable we have filtered on for by our chosen response and explanatory variables.
 }
 \description{
-Create an accessible graph which highlights the changes in price depending on price, type, and brand
+Creates an accessible boxplot which highlights the relationship between a numeric variable and two other variables (either numeric or categorical).
 }
 \examples{
-boxplot3Variables(data = shoelati, cat_variable = brand, cat_filteredOn = c("Adidas", "Nike"),
-cat_variable_x = type, num_variable_y = price_usd,
+boxplot3Variables(data = shoelati, variable_toFilter = brand,
+variable_filteredOn = c("Adidas", "Nike"),
+explanatory_variable = type, response_variable = price_usd,
 graph_title = "Average Price by Type of Shoe According to Brand",
 xaxis_label = "Type", yaxis_label = "Price (USD)")
+
 
 }

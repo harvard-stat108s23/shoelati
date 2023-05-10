@@ -5,32 +5,27 @@
 \alias{shoelati}
 \title{Information on shoe sales in a particular region.}
 \format{
-A tibble with 1006 rows and 8 variables:
+A tibble with 1006 rows and 10 variables:
 \describe{
 \item{brand}{Shoe brand (including Puma, Vans, etc)}
-\item{Model}{Model name or number of the shoe (including Air Max 270, Chuck 70, etc)}
-\item{Type}{Type of shoe (includes fashion, casual, etc)}
-\item{Gender}{The specific demographic the shoe was designed for (male or female)}
-\item{Size}{Shoe size according to US standard (in or cm)}
-\item{Color}{Exterior color of the shoe (features one or more colors)}
-\item{Material}{Shoe material (includes knit, synthetic, etc)}
+\item{model}{Model name and number (including Air Max 270, Chuck 70, etc)}
+\item{type}{Type of shoe (including fashion, casual, etc)}
+\item{gender}{The specific demographic the shoe was designed for (male or female)}
+\item{size_us}{Shoe size according to US standard (in or cm)}
+\item{color}{Exterior color of the shoe (features one or more colors)}
+\item{material}{Shoe material (includes knit, synthetic, etc)}
+\item{price_usd}{Price of the shoe in US dollars.}
+\item{general_type}{The type of shoe more generalized into one of six categories}
+\item{emoji}{The unicode matching the appropriate shoe emoji to the general_type variable}
 }
 }
 \source{
-{https://www.kaggle.com/datasets/rkiattisak/shoe-prices-dataset}
-
-{Gentoo penguins: Palmer Station Antarctica LTER and K. Gorman. 2020. Structural size measurements and isotopic signatures of foraging among adult male and female Gentoo penguin (Pygoscelis papua) nesting along the Palmer Archipelago near Palmer Station, 2007-2009 ver 5. Environmental Data Initiative.} \doi{10.6073/pasta/7fca67fb28d56ee2ffa3d9370ebda689}
-
-{Chinstrap penguins: Palmer Station Antarctica LTER and K. Gorman. 2020. Structural size measurements and isotopic signatures of foraging among adult male and female Chinstrap penguin (Pygoscelis antarcticus) nesting along the Palmer Archipelago near Palmer Station, 2007-2009 ver 6. Environmental Data Initiative.} \doi{10.6073/pasta/c14dfcfada8ea13a17536e73eb6fbe9e}
-
-{Originally published in: Gorman KB, Williams TD, Fraser WR (2014) Ecological Sexual Dimorphism and Environmental Variability within a Community of Antarctic Penguins (Genus Pygoscelis). PLoS ONE 9(3): e90081. doi:10.1371/journal.pone.0090081}
+{Shoe Prices Dataset from kaggle: https://www.kaggle.com/datasets/rkiattisak/shoe-prices-dataset}
 }
 \usage{
 shoelati
 }
 \description{
-Includes measurements for penguin species, island in Palmer Archipelago,
-size (flipper length, body mass, bill dimensions), and sex.
-This is a subset of \code{\link{penguins_raw}}.
+Fascinating visualizations and datatables which explore the associations of these variables.
 }
 \keyword{datasets}

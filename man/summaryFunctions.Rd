@@ -2,36 +2,36 @@
 % Please edit documentation in R/summaryFunctions.R
 \name{summaryFunctions}
 \alias{summaryFunctions}
-\title{Find summary functions for the data.}
+\title{Perform summary functions.}
 \usage{
 summaryFunctions(
   data,
-  cat_variable,
-  cat_filteredOn,
-  num_variable_x,
-  num_variable_y,
-  title_name
+  variable_toFilter,
+  variable_filteredOn,
+  explanatory_variable,
+  response_variable
 )
 }
 \arguments{
 \item{data}{A data frame}
 
-\item{cat_variable}{Categorical variable in the data frame to filter on.}
+\item{variable_toFilter}{One numeric or categorical variable in the data frame to filter on.}
 
-\item{cat_filteredOn}{Filter the categorical variable (cat_variable) according to relevant subcategories.}
+\item{variable_filteredOn}{Filter the numeric or categorical variable (variable_toFilter) according to relevant subcategories of interest.}
 
-\item{num_variable_x}{Numerical variable to plot on the x-axis of the visualization.}
+\item{explanatory_variable}{One unique numeric or categorical variable to group the data by to better understand the response variable.}
 
-\item{num_variable_y}{Numerical variable to plot on the y-axis of the visualization.}
+\item{response_variable}{One numeric variable whose values are analyzed in the context of the explanatory and filtered variable to draw trends in the data.}
 }
 \value{
-A datatable with the summary functions.
+A datatable with multiple summary functions perfomed on a chosen response variable.    Dimensions depend on the number of categories we have filtered on and the number of values for our explanatory variable.
 }
 \description{
-Find summary functions for the data.
+Calculates summary functions (mean, median, etc.) for a response variable after grouping or filtering by two specific other variables (either numeric or categorical) to detect trends.
 }
 \examples{
-summaryFunctions(data = shoelati, cat_variable = brand, cat_filteredOn = c("Adidas", "Nike"),
-num_variable_x = size_us, num_variable_y = price_usd)
+summaryFunctions(data = shoelati, variable_toFilter = brand,
+variable_filteredOn = c("Adidas", "Nike"),
+explanatory_variable = size_us, response_variable = price_usd)
 
 }

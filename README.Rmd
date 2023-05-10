@@ -15,10 +15,12 @@ knitr::opts_chunk$set(
 
 # shoelati
 
+#insert my hex sticker
+
 <!-- badges: start -->
 <!-- badges: end -->
 
-shoelati is an extension of ggplot2 which makes data representations more accessible, conclusive, and fun. This package uses packages such as viridis to make the visualizations specifically more reacheable for all individauls. It also performs commmon summary functions to find trends. Finally, it demonstrates how we can use geoms such as emojis to make more fun graphs.  
+shoelati uses data on shoes collected from a particular region to understand the relationships between the variables in the data and how they influence one another. This package makes visualizations which are more accessible, conclusive, and fun. Specifically, it uses package uses packages such as viridis to make the visualizations more accessible for all individuals, including those who suffer from colorblindness. It also performs commmon summary functions to find trends in numeric variables after grouping or filtering by numeric or categorical variables. Finally, it demonstrates how we can use geoms such as emojis to make more fun graphs, while also uncovering how general shoe types can cluster in particular variables.  
 
 ## Installation
 
@@ -26,17 +28,27 @@ You can install the development version of shoelati from [GitHub](https://github
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("harvard-stat108s23/project2-group18")
+devtools::install_github("harvard-stat108s23/shoelati")
+```
+
+##Exploring the data
+Let's first explore the different variables in the data and their diverse range of inputs.
+
+```{r}
+library(shoelati)
+library(tidyverse)
+
+```
+
+```{r sum-shoelati}
+summary(shoelati)
 ```
 
 ## Examples
 
 We can wrangle the data using unique variables to perform summary functions: 
 
-```{r example}
-library(shoelati)
-library(tidyverse)
-
+```{r sum-table}
 shoelati |>
   group_by(brand) |>
   summarize(mean = mean(price_usd),
@@ -51,7 +63,7 @@ shoelati |>
 
 We can also create meaningful data vidualizations:
 
-```{r example 2}
+```{r price-brand}
 library(viridis)
 
 ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) +
@@ -60,25 +72,15 @@ ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) 
   scale_color_viridis(discrete = TRUE) +
   labs(title = "How does Price Distribution vary according to Brand",
        x = "Price (USD)",
-       y = "Brand") +
+       y = "Brand",
+       caption = "Each color represents a different brand.") +
   theme(text = element_text(size = 15))
 
 ```
 
 
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(shoelati)
-```
-
 You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
 
 In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.

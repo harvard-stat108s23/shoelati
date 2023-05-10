@@ -1,0 +1,276 @@
+---
+title: "shoelati"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{shoelati}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(shoelati)
+library(ggplot2)
+library(dplyr)
+library(viridis)
+library(ggimage)
+library(tidyr)
+
+```
+
+
+The `shoelati` R package highlights data from the online source kaggle for shoe prices in a particular region of the United States. In this vignette, we will highlight the different properties of this package as well as the key functions which are created. 
+
+
+##Shoe Who?
+
+The 'shoelati' dataset contains information on shoe sales in a particular region (the specific region is not specified in the original dataset). The original data includes information on the brand, model, type of shoe, gender, size, color, material, and price. 'shoelati' adds information concerning the general type of shoe and the emoji code matching this general type.
+
+
+##Installation
+
+You can install the development version of shoelati from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("harvard-stat108s23/shoelati")
+```
+
+##Exploring the Data
+
+First, let's take a took at sholati
+```{r}
+glimpse(shoelati)
+
+```
+There are no `NA` values in the dataset. 
+
+```{r}
+#drop NA values and count the number of rows
+shoelati |>
+  drop_na() |>
+  count()
+
+#count the number of rows in the whole dataset.
+shoelati |>
+  count()
+
+```
+
+`shoelati` contains 8 categorical variables and 2 numeric variables as highlighted below.
+Categorical: brand, model, type, gender, color, material, general_type, and emoji
+Numeric: size_us and price_usd
+
+Class of variables can be determined using the following function->
+```{r}
+variableClass <- function(variable){
+  class(variable)
+}
+
+#example
+variableClass(variable = shoelati$brand)
+
+```
+
+
+##Example One
+Let's first explore the role of gender when it comes to the number of sales according to certain brands.
+-> Note the dataset only includes gender in terms of two categories: Men and Women, which does not represent the vast diversity of genders in the world today.
+
+Let's first count the number of shoes in the dataset which were designed for men versus women.
+```{r}
+shoelati |>
+  count(gender)
+
+```
+We can see above that though not major, there is a difference in 64 more shoes created for men than for women.
+
+Let's not perform some summary functions on the data in order to explore how the price of shoes may vary between men and womens' shoes. These summary functions include the mean, median, standard deviation, maximum, minimum, and total count.
+
+```{r}
+shoelati |>
+  group_by(brand, gender) |>
+  summarize(mean = mean(price_usd),
+            median = median(price_usd),
+            stand_dev = sd(price_usd),
+            max = max(price_usd),
+            min = min(price_usd),
+            count = n())
+
+```
+
+We can see above that the general price of shoes according to brand will vary according to the gender. Adidas and Reebok seem to price their mens' shoes significantly higher in price than their womens' shoes while Nike and Converse seem to price their womens' shoes significantly higher in price than their mens' shoes. 
+
+
+In terms of the number of shoes which were produced for these two genders, Adidas, Nike, Reebok, and Puma had rather notable differences in shoe sails. Visualizing these differences enables individuals to make striking conclusions concerning
+
+```{r}
+#make a visualization to explore most significant differences in shoe sales between gender by brand
+shoelati |>
+  filter(brand %in% c("Adidas", "Nike", "Reebok", "Puma")) |>
+  ggplot(mapping = aes(x = gender, fill = gender)) +
+  facet_wrap(~brand) +
+  geom_bar() +
+  scale_fill_viridis(discrete = TRUE) + 
+  labs(title = "Number of Shoes Sold by Gender Looking at Different Brands",
+       subtitle = "The bands chosen are those which had the largest differences in number of shoes sold 
+       between the genders in the dataset",
+       y = "Number of Shoes Sold",
+       x = "Gender",
+       caption = "The graph is colored according to gender") +
+  guides(fill = "none")
+  
+
+
+```
+Looking at this visualization, we can see that in general, brands have sold more male-designed shoes than female-designed shoes, though Adidas is the exception in that this brand sold significantly more female-designed shoes than male-designed shoes. It would be interesting to examine the gender identities of those purchasing these shoes, specifically whether there are many people identifying as female who choose to buy a male-designed shoe. This statistic would enable us to be able to more reasonably determine if the data we observe is due to more males than females purchasing shoes or if there are other confounding variables that are not accounted for in the data.
+
+##Example 2
+Now, let's explore the relationship the most common material for shoes in this dataset and their price.
+
+First, let's examine all of the different kinds of materials of shoes in the dataset.
+
+```{r}
+shoelati |>
+  count(material)
+
+```
+We can see from above that the majority of shoes in the dataset are Canvas. In fact, canvas shoes more than triple the rest of the other shoe types in the datatable combined.
+
+Let's explore which brands in particular use this canvas material in their designs.
+
+```{r}
+shoelati |>
+  filter(material == "Canvas") |>
+  count(brand)
+
+```
+It seems as though Converse and Vans are the only two brands who use this material, which makes me question how how represented each of the brands are in the original dataset. 
+
+Let's next examine how many of shoes of each brand are included in the dataset.
+
+```{r}
+shoelati |>
+  count(brand)
+
+```
+It seems like there is a diverse representation of shoes in the data. This points to the conclusion that the other brands (not Converse and brands) must produce shoes out of a wide variety of materials rather than simply sticking to one. 
+
+Now, let's get back to our original task and try to understand how the material of the shoe may impact the price. In order to do so, let's use the most common material type (canvas) so that we have plenty of data to work with when looking at our association. 
+
+```{r}
+shoelati |>
+  filter(material == "Canvas") |>
+  
+  ggplot(mapping = aes(x = price_usd)) +
+  geom_histogram(bins = 15,
+                 fill = "cornflowerblue",
+                 color = "black") +
+  guides(fill = "none") +
+  labs(title = "The distribution of Shoe Price for Canvas Shoes",
+       y = "Number of Shoes",
+       x = "Shoe Price (USD)")
+
+```
+This association is somewhat useful in determining the most common shoe prices for canvas shoes, as indicated by the peaks in the histogram. However, we need more data on the prices for Canvas material shoes in order to draw more wholesome conclusions from this plot specifically. 
+
+Taking this plot one step further though, it is fascinating to observe how the trends in the number of shoes for the shoe price will vary according to the brands that we are examining. Let's take a look at this association with our Canvas shoes, looking at the differences in trends between Converse and Vans.
+
+```{r}
+shoelati |>
+  filter(material == "Canvas") |>
+  
+  ggplot(mapping = aes(x = price_usd)) +
+  geom_histogram(bins = 15,
+                 fill = "cornflowerblue",
+                 color = "black") +
+  facet_wrap(~brand) +
+  guides(fill = "none") +
+  labs(title = "The distribution of Shoe Price for Canvas Shoes for Converse and Vans",
+       y = "Number of Shoes",
+       x = "Shoe Price (USD)")
+
+```
+As is highlighted by the visualization above, the number of shoes sold at each prices varies more for Converse than it does for Vans. This could  be due to the fact that the trends in sales for Converse shoes vary according to the model, which is not the case with Vans where one model sells relatively more rapidly than the others. Another explanation for this trend could be the fact that Converse shoes vary in price ranges versus Vans are consistanly marked within a certain price range (no matter the model).  
+
+#Exmaple 3
+
+Let's now use emojis in order to graph the relationship between shoe size and shoe price.
+Note -> Emojis have been manually added into the dataset based on general type categories of shoes.
+
+Let's first explore the general categories of shoe type that the emojis have been added to.
+```{r}
+shoelati |>
+  count(general_type)
+```
+As evidenced in the table above, there are not many shoes that fall under the "slides" or the "trail" category, and it may have been beneficial to remove these shoes from the dataset in creating these visualizations. However, the emojis coding these general_type categories are very fun, so I decided to keep them.
+
+The general types of "everyday" and "work-out" seem to be the most frequent shoe types. Let's explore which types of shoes from the original dataset code these general types. 
+
+```{r}
+shoelati |>
+  filter(general_type == "everyday") |>
+  group_by(type) |>
+  summarize(count = n()) |>
+  arrange(desc(count)) 
+
+shoelati |>
+  filter(general_type == "work-out") |>
+  group_by(type) |>
+  summarize(count = n()) |>
+  arrange(desc(count))
+
+```
+
+"Everyday" seems like a rather vague characterization of shoes, so it is important to note that this category includes casual, lifestyle, retro, and walking types of shoes. I decided to include the walking category type in the everyday general type rather than the work-out general type because I would consider walking an everyday activity. Especially when compared to the other types of activities in the work-out category, walking doesn't seem like the same amount of physical exertion. Speaking of the work-out general type categoery, this category includes the basketball, cross-training, crossfit, racing, trail running, training, weightlifting, and most predominantly trail running.
+
+Before we make our visualization, let's find the minimum and maximum values for the x and y axes so that our graph can be zoomed in appropriately to a specific region. We will be using shoe sizes (size_us) on the x-axis and shoe price (price_usd) on the y-axis
+
+```{r}
+shoelati |>
+  summarize(min_x = min(size_us),
+            max_x = max(size_us),
+            min_y = min(price_usd),
+            max_y = max(price_usd))
+  
+
+```
+This means that shoe sizes range from 6-12 in US sizes and that prices range from 25-250 dollars in USD.
+
+Now, let's make a visualization using some of these fun emojis!
+
+```{r}
+#use a subset of the data so that we can see the different emojis clearly
+shoelati |>
+  filter(color == "Black") |>
+
+#make the visualization
+  ggplot(mapping = aes(x = size_us, y = price_usd, image = emoji)) +
+  geom_emoji(position = position_jitter(width = 3, height = 3)) +
+  xlim(6, 12) +
+  ylim(25, 250) +
+  labs(title = "Shoe Price According to Shoe Size for Certain Materials",
+       caption = "This visualization uses emojis as its geom.",
+       x = "Shoe Size (US)",
+       y = "Shoe Price (USD)")
+
+```
+Note that the graph will not include all of the rows in the dataset that it has been filtered to in order to be able to produce a readable graph. Additionally, this visualization should not be used when determinging specific values for shoe size and price, but rather the general trends for the general types of shoes.
+
+The code above mimics the emogiViz function. I have plugged in the inputs for the above visualization into my function code to produce a very similar graph. Note that these graphs will not be exactly identical because R will randomly select rows to include in the visualization, so as to prevent overcrowding from occuring.
+
+```{r}
+emojiViz(data = shoelati, variable_toFilter = color, variable_filteredOn = c("Black"),
+         explanatory_variable = size_us, response_variable = price_usd, emoji_code = emoji,
+         num_variable_x_min = 6, num_variable_x_max = 12, num_variable_y_min = 25, num_variable_y_max = 250,
+         graph_title = "Shoe Price According to Shoe Size", xaxis_label = "Size (US)", yaxis_label = "Price (USD)")
+
+```
+
+

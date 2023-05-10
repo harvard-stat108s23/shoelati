@@ -2,14 +2,14 @@
 % Please edit documentation in R/emojiViz.R
 \name{emojiViz}
 \alias{emojiViz}
-\title{Create a graph between two numerial variables using emojis as the geom and filtereing by a categorical variable}
+\title{An emoji visualization}
 \usage{
 emojiViz(
   data,
-  cat_variable,
-  cat_filteredOn,
-  num_variable_x,
-  num_variable_y,
+  variable_toFilter,
+  variable_filteredOn,
+  explanatory_variable,
+  response_variable,
   emoji_code,
   graph_title,
   xaxis_label,
@@ -23,15 +23,15 @@ emojiViz(
 \arguments{
 \item{data}{A data frame}
 
-\item{cat_variable}{Categorical variable in the data frame to filter on.}
+\item{variable_toFilter}{One numeric or categorical variable in the data frame to filter on.}
 
-\item{cat_filteredOn}{Filter the categorical variable (cat_variable) according to relevant subcategories.}
+\item{variable_filteredOn}{Filter the numeric or categorical variable (variable_toFilter) according to relevant subcategories of interest.}
 
-\item{num_variable_x}{Numerical variable to plot on the x-axis of the visualization.}
+\item{explanatory_variable}{One NUMERIC variable mapped to the x-axis (this is different from the other functions which can use numeric or categorical inputs).}
 
-\item{num_variable_y}{Numerical variable to plot on the y-axis of the visualization.}
+\item{response_variable}{One numeric variable to mapped to the y-axis.}
 
-\item{emoji_code}{Variable which includes the emoji codes for our dataset.}
+\item{emoji_code}{The unicode for emojis matched to the rows in the dataframe}
 
 \item{graph_title}{The graph's label.}
 
@@ -48,14 +48,17 @@ emojiViz(
 \item{num_variable_y_max}{The maximum value of the variable plotted on the y-axis.}
 }
 \value{
-A visualization similar to a scatterplot, but which uses emojis as the geom.
+A visualization similar to a scatterplot, but which uses emojis as the geom.   Rows may be removed in order to make the visualization readable.
 }
 \description{
-Create a graph between two numerial variables using emojis as the geom and filtereing by a categorical variable
+Creates a graph using two numeric variables and emojis as the geom (filtering by a categorical variable) to determine trends in general shoe type and variables of interest.
 }
 \examples{
-emojiViz(data = shoelati, cat_variable = brand, cat_filteredOn = c("Adidas", "Nike"),
-num_variable_x = size_us, num_variable_y = price_usd, emoji_code = emoji,
-num_variable_x_min = 6, num_variable_x_max = 12, num_variable_y_min = 25, num_variable_y_max = 250,
-graph_title = "Shoe Price According to Shoe Size", xaxis_label = "Size (US)", yaxis_label = "Price (USD)")
+emojiViz(data = shoelati, variable_toFilter = brand,
+variable_filteredOn = c("Adidas", "Nike"),explanatory_variable = size_us,
+response_variable = price_usd, emoji_code = emoji,
+num_variable_x_min = 6, num_variable_x_max = 12,
+num_variable_y_min = 25, num_variable_y_max = 250,
+graph_title = "Shoe Price According to Shoe Size",
+xaxis_label = "Size (US)", yaxis_label = "Price (USD)")
 }

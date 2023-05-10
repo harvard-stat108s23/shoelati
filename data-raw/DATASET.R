@@ -1,4 +1,5 @@
-## code to prepare `DATASET` dataset goes here
+
+## wrangle pre-existing data to make shoelati
 
 shoelati <- readr::read_csv("data-raw/Shoe prices.csv") |>
   dplyr::mutate(Size = stringr::str_remove(Size, "US "),
@@ -13,14 +14,16 @@ shoelati <- readr::read_csv("data-raw/Shoe prices.csv") |>
   Type %in% c("fashion") ~ "fashion",
   Type %in% c("hiking", "trail") ~ "trail",
   Type %in% c("slides") ~ "slides",
-  Type %in% c("skate") ~ "roller-skate"
+  Type %in% c("skate") ~ "skates"
 ))
 
 shoemojis <- data.frame(
-  General_type = c("work-out", "everyday", "fashion", "trail", "slides", "roller-skate"),
-  Emoji = c("1F45F", "1F97F", "1F460", "1F97E", "1FA74", "1F6FC"))
+  General_type = c("work-out", "everyday", "fashion", "trail", "slides", "skates"),
+  Emoji = c("1f45f", "1f97f", "1f460", "1f97e", "1f461", "26f8"))
 
-shoelati <- dplyr::left_join(shoelati, shoemojis)
+shoelati <- dplyr::left_join(shoelati, shoemojis) |>
+  janitor::clean_names()
 
 
 usethis::use_data(shoelati, overwrite = TRUE)
+
