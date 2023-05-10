@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-<img src="man/figures/hex-shoelati.png" width="0.5" />
+<img src="man/figures/hex-shoelati.png" width="15%" />
 <!-- badges: end -->
 
 shoelati uses data on shoes collected from a particular region (last
