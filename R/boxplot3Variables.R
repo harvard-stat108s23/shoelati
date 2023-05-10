@@ -38,23 +38,18 @@ boxplot3Variables <- function(data, variable_toFilter, variable_filteredOn, expl
      stop("The categories listed in the variable_filteredOn variable are not found in the variable_toFilter category.")
    }
 
-   # make sure the inputs for variable_toFilter and explanatory_variable are unique variables
+   #make sure the inputs for variable_toFilter and explanatory_variable are unique variables
    explanatory_variable_vec <- data |>
      dplyr::pull({{explanatory_variable}})
    if(all(variable_toFilter_vec %in% explanatory_variable_vec)){
      stop("The variable_toFilter variable and the explanatory_variable variable must be unique inputs.")
    }
 
-#fix
-  #filter for the specific variable we want to examine
- # data_filtered_cat <- data |>
-   # dplyr::filter({{variable_toFilter}} %in% c({{variable_filteredOn}})) |>
-  #  dplyr::mutate(discrete_value = dplyr::case_when(
-  #    is.character({{variable_toFilter}}) ~ TRUE,
-   #   is.numeric({{variable_toFilter}}) ~ FALSE)
- #   )
-
-
+   #make sure that the variable_toFilter is categorical
+   if((is.numeric(variable_toFilter_vec))){
+     stop("Please insert a categorical variable for the variable to filter by so that the color can
+          take on discrete values in scale_fill_viridis(discrete = TRUE)")
+   }
 
   #filter cat_variable according to cat_filteredOn
    data_filtered_cat <- data |>
@@ -73,12 +68,10 @@ boxplot3Variables <- function(data, variable_toFilter, variable_filteredOn, expl
                   y = yaxis_label,
                   caption = "The colors denote the different shoe brands.") +
     ggplot2::guides(fill = "none") +
-    viridis::scale_fill_viridis(discrete = TRUE) +
-    ggplot2::geom_contour(ggplot2::aes(z = {{variable_toFilter}}))
+    viridis::scale_fill_viridis(discrete = TRUE)
 
   return(boxplot)
 }
 
 
-#adjust the discrete
 

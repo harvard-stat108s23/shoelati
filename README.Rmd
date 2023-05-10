@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-shoelati uses data on shoes collected from a particular region to understand the relationships between the variables in the data and how they influence one another. This package makes visualizations which are more accessible, conclusive, and fun. Specifically, it uses package uses packages such as viridis to make the visualizations more accessible for all individuals, including those who suffer from colorblindness. It also performs commmon summary functions to find trends in numeric variables after grouping or filtering by numeric or categorical variables. Finally, it demonstrates how we can use geoms such as emojis to make more fun graphs, while also uncovering how general shoe types can cluster in particular variables.  
+shoelati uses data on shoes collected from a particular region (last updated two months ago) to understand the relationships between the variables in the data and how they influence one another. This package makes visualizations which are more accessible, conclusive, and fun. Specifically, it uses package uses packages such as viridis to make the visualizations more accessible for all individuals, including those who suffer from colorblindness. It also performs commmon summary functions to find trends in numeric variables after grouping or filtering by numeric or categorical variables. Finally, it demonstrates how we can use geoms such as emojis to make more fun graphs, while also uncovering how general shoe types can cluster in particular variables.  
 
 ## Installation
 
@@ -36,7 +36,8 @@ Let's first explore the different variables in the data and their diverse range 
 
 ```{r}
 library(shoelati)
-library(tidyverse)
+library(ggplot2)
+library(dplyr)
 
 ```
 

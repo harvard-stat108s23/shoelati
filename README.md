@@ -8,17 +8,17 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-shoelati uses data on shoes collected from a particular region to
-understand the relationships between the variables in the data and how
-they influence one another. This package makes visualizations which are
-more accessible, conclusive, and fun. Specifically, it uses package uses
-packages such as viridis to make the visualizations more accessible for
-all individuals, including those who suffer from colorblindness. It also
-performs commmon summary functions to find trends in numeric variables
-after grouping or filtering by numeric or categorical variables.
-Finally, it demonstrates how we can use geoms such as emojis to make
-more fun graphs, while also uncovering how general shoe types can
-cluster in particular variables.
+shoelati uses data on shoes collected from a particular region (last
+updated two months ago) to understand the relationships between the
+variables in the data and how they influence one another. This package
+makes visualizations which are more accessible, conclusive, and fun.
+Specifically, it uses package uses packages such as viridis to make the
+visualizations more accessible for all individuals, including those who
+suffer from colorblindness. It also performs commmon summary functions
+to find trends in numeric variables after grouping or filtering by
+numeric or categorical variables. Finally, it demonstrates how we can
+use geoms such as emojis to make more fun graphs, while also uncovering
+how general shoe types can cluster in particular variables.
 
 ## Installation
 
@@ -31,21 +31,20 @@ devtools::install_github("harvard-stat108s23/shoelati")
 ```
 
 \##Exploring the data Let’s first explore the different variables in the
-data!
+data and their diverse range of inputs.
 
 ``` r
 library(shoelati)
-library(tidyverse)
-#> ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-#> ✔ dplyr     1.1.0     ✔ readr     2.1.4
-#> ✔ forcats   1.0.0     ✔ stringr   1.5.0
-#> ✔ ggplot2   3.4.1     ✔ tibble    3.1.8
-#> ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-#> ✔ purrr     1.0.1     
-#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-#> ✖ dplyr::filter() masks stats::filter()
-#> ✖ dplyr::lag()    masks stats::lag()
-#> ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors
+library(ggplot2)
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 ```
 
 ``` r
@@ -114,7 +113,8 @@ ggplot(data = shoelati, mapping = aes(x = price_usd, y = brand, color = brand)) 
   scale_color_viridis(discrete = TRUE) +
   labs(title = "How does Price Distribution vary according to Brand",
        x = "Price (USD)",
-       y = "Brand") +
+       y = "Brand",
+       caption = "Each color represents a different brand.") +
   theme(text = element_text(size = 15))
 ```
 
